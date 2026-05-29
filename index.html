@@ -1,62 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Personal Finance Tracker</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
+
         <h1>Personal Finance Tracker</h1>
-        <p class="subtitle">Track your income, expenses, and balance</p>
+        <p class="subtitle">Manage your income and expenses</p>
 
-        <div class="summary">
-            <div>
-                <h3>Total Income</h3>
-                <p>${{ income }}</p>
+        <div class="cards">
+
+            <div class="card">
+                <h2>Income</h2>
+                <p id="income">$0</p>
             </div>
 
-            <div>
-                <h3>Total Expenses</h3>
-                <p>${{ expenses }}</p>
+            <div class="card">
+                <h2>Expenses</h2>
+                <p id="expenses">$0</p>
             </div>
 
-            <div>
-                <h3>Current Balance</h3>
-                <p>${{ balance }}</p>
+            <div class="card">
+                <h2>Balance</h2>
+                <p id="balance">$0</p>
             </div>
+
         </div>
 
-        <form method="POST">
-            <select name="type" required>
+        <div class="form-box">
+
+            <select id="type">
                 <option value="Income">Income</option>
                 <option value="Expense">Expense</option>
             </select>
 
-            <input type="text" name="description" placeholder="Description" required>
-            <input type="number" name="amount" placeholder="Amount" step="0.01" required>
+            <input type="text" id="description" placeholder="Description">
 
-            <button type="submit">Add Transaction</button>
-        </form>
+            <input type="number" id="amount" placeholder="Amount">
 
-        <h2>Transactions</h2>
+            <button onclick="addTransaction()">Add</button>
+
+        </div>
 
         <table>
-            <tr>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Amount</th>
-            </tr>
 
-            {% for transaction in transactions %}
-            <tr>
-                <td>{{ transaction.type }}</td>
-                <td>{{ transaction.description }}</td>
-                <td>${{ transaction.amount }}</td>
-            </tr>
-            {% endfor %}
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+
+            <tbody id="transaction-list">
+
+            </tbody>
+
         </table>
+
     </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
