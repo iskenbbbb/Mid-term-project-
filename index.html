@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Personal Finance Tracker</h1>
+        <p class="subtitle">Track your income, expenses, and balance</p>
+
+        <div class="summary">
+            <div>
+                <h3>Total Income</h3>
+                <p>${{ income }}</p>
+            </div>
+
+            <div>
+                <h3>Total Expenses</h3>
+                <p>${{ expenses }}</p>
+            </div>
+
+            <div>
+                <h3>Current Balance</h3>
+                <p>${{ balance }}</p>
+            </div>
+        </div>
+
+        <form method="POST">
+            <select name="type" required>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+            </select>
+
+            <input type="text" name="description" placeholder="Description" required>
+            <input type="number" name="amount" placeholder="Amount" step="0.01" required>
+
+            <button type="submit">Add Transaction</button>
+        </form>
+
+        <h2>Transactions</h2>
+
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.description }}</td>
+                <td>${{ transaction.amount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>
